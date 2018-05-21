@@ -8,12 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		00DCC0AD20AF168900194A7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DCC0AC20AF168900194A7A /* AppDelegate.swift */; };
-		00DCC0AF20AF168900194A7A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DCC0AE20AF168900194A7A /* ViewController.swift */; };
 		00DCC0B220AF168900194A7A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00DCC0B020AF168900194A7A /* Main.storyboard */; };
 		00DCC0B420AF168D00194A7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00DCC0B320AF168D00194A7A /* Assets.xcassets */; };
 		00DCC0B720AF168D00194A7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 00DCC0B520AF168D00194A7A /* LaunchScreen.storyboard */; };
-		00DCC0C220AF168D00194A7A /* BikeBuddyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DCC0C120AF168D00194A7A /* BikeBuddyTests.swift */; };
 		00DCC0CD20AF168D00194A7A /* BikeBuddyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DCC0CC20AF168D00194A7A /* BikeBuddyUITests.swift */; };
+		00DCC0DE20AF17DE00194A7A /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DCC0DD20AF17DE00194A7A /* Station.swift */; };
+		00DCC0E120AF17ED00194A7A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DCC0E020AF17ED00194A7A /* Network.swift */; };
+		00DCC0E320AF186500194A7A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DCC0E220AF186500194A7A /* Location.swift */; };
+		00DCC0E520AF1A7600194A7A /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DCC0E420AF1A7600194A7A /* MainViewController.swift */; };
+		00DCC0E820AF1C9300194A7A /* BikeBuddyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DCC0E720AF1C9300194A7A /* BikeBuddyService.swift */; };
+		00DCC0EB20AF258C00194A7A /* BikeBuddyServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DCC0EA20AF258C00194A7A /* BikeBuddyServiceTests.swift */; };
+		00DCC0ED20AF281100194A7A /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DCC0EC20AF281100194A7A /* MainViewModel.swift */; };
+		00DCC0EF20AF2D2F00194A7A /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DCC0EE20AF2D2F00194A7A /* Box.swift */; };
+		00DCC0F120AF34C600194A7A /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DCC0F020AF34C600194A7A /* NetworkHelper.swift */; };
+		00DCC0F320AF34FD00194A7A /* BikeBuddyServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DCC0F220AF34FD00194A7A /* BikeBuddyServiceHandler.swift */; };
+		00DCC0F520AF488D00194A7A /* MapStationLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DCC0F420AF488D00194A7A /* MapStationLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,17 +45,26 @@
 /* Begin PBXFileReference section */
 		00DCC0A920AF168900194A7A /* BikeBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BikeBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00DCC0AC20AF168900194A7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		00DCC0AE20AF168900194A7A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		00DCC0B120AF168900194A7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		00DCC0B320AF168D00194A7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00DCC0B620AF168D00194A7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		00DCC0B820AF168D00194A7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00DCC0BD20AF168D00194A7A /* BikeBuddyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BikeBuddyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		00DCC0C120AF168D00194A7A /* BikeBuddyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeBuddyTests.swift; sourceTree = "<group>"; };
 		00DCC0C320AF168D00194A7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00DCC0C820AF168D00194A7A /* BikeBuddyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BikeBuddyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00DCC0CC20AF168D00194A7A /* BikeBuddyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeBuddyUITests.swift; sourceTree = "<group>"; };
 		00DCC0CE20AF168D00194A7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00DCC0DD20AF17DE00194A7A /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
+		00DCC0E020AF17ED00194A7A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		00DCC0E220AF186500194A7A /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		00DCC0E420AF1A7600194A7A /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		00DCC0E720AF1C9300194A7A /* BikeBuddyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeBuddyService.swift; sourceTree = "<group>"; };
+		00DCC0EA20AF258C00194A7A /* BikeBuddyServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeBuddyServiceTests.swift; sourceTree = "<group>"; };
+		00DCC0EC20AF281100194A7A /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		00DCC0EE20AF2D2F00194A7A /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		00DCC0F020AF34C600194A7A /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
+		00DCC0F220AF34FD00194A7A /* BikeBuddyServiceHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeBuddyServiceHandler.swift; sourceTree = "<group>"; };
+		00DCC0F420AF488D00194A7A /* MapStationLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStationLocation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +115,12 @@
 		00DCC0AB20AF168900194A7A /* BikeBuddy */ = {
 			isa = PBXGroup;
 			children = (
+				00DCC0E920AF1CC500194A7A /* Helpers */,
+				00DCC0E620AF1B0F00194A7A /* Services */,
+				00DCC0DC20AF176700194A7A /* ViewModel */,
+				00DCC0DB20AF176100194A7A /* View */,
+				00DCC0DA20AF175700194A7A /* Model */,
 				00DCC0AC20AF168900194A7A /* AppDelegate.swift */,
-				00DCC0AE20AF168900194A7A /* ViewController.swift */,
 				00DCC0B020AF168900194A7A /* Main.storyboard */,
 				00DCC0B320AF168D00194A7A /* Assets.xcassets */,
 				00DCC0B520AF168D00194A7A /* LaunchScreen.storyboard */,
@@ -110,8 +132,8 @@
 		00DCC0C020AF168D00194A7A /* BikeBuddyTests */ = {
 			isa = PBXGroup;
 			children = (
-				00DCC0C120AF168D00194A7A /* BikeBuddyTests.swift */,
 				00DCC0C320AF168D00194A7A /* Info.plist */,
+				00DCC0EA20AF258C00194A7A /* BikeBuddyServiceTests.swift */,
 			);
 			path = BikeBuddyTests;
 			sourceTree = "<group>";
@@ -123,6 +145,51 @@
 				00DCC0CE20AF168D00194A7A /* Info.plist */,
 			);
 			path = BikeBuddyUITests;
+			sourceTree = "<group>";
+		};
+		00DCC0DA20AF175700194A7A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				00DCC0DD20AF17DE00194A7A /* Station.swift */,
+				00DCC0E020AF17ED00194A7A /* Network.swift */,
+				00DCC0E220AF186500194A7A /* Location.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		00DCC0DB20AF176100194A7A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				00DCC0E420AF1A7600194A7A /* MainViewController.swift */,
+				00DCC0F420AF488D00194A7A /* MapStationLocation.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		00DCC0DC20AF176700194A7A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				00DCC0EC20AF281100194A7A /* MainViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		00DCC0E620AF1B0F00194A7A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				00DCC0F220AF34FD00194A7A /* BikeBuddyServiceHandler.swift */,
+				00DCC0E720AF1C9300194A7A /* BikeBuddyService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		00DCC0E920AF1CC500194A7A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				00DCC0EE20AF2D2F00194A7A /* Box.swift */,
+				00DCC0F020AF34C600194A7A /* NetworkHelper.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,8 +323,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00DCC0AF20AF168900194A7A /* ViewController.swift in Sources */,
+				00DCC0F320AF34FD00194A7A /* BikeBuddyServiceHandler.swift in Sources */,
+				00DCC0ED20AF281100194A7A /* MainViewModel.swift in Sources */,
+				00DCC0F520AF488D00194A7A /* MapStationLocation.swift in Sources */,
+				00DCC0F120AF34C600194A7A /* NetworkHelper.swift in Sources */,
+				00DCC0DE20AF17DE00194A7A /* Station.swift in Sources */,
+				00DCC0E320AF186500194A7A /* Location.swift in Sources */,
+				00DCC0E120AF17ED00194A7A /* Network.swift in Sources */,
+				00DCC0E820AF1C9300194A7A /* BikeBuddyService.swift in Sources */,
+				00DCC0EF20AF2D2F00194A7A /* Box.swift in Sources */,
 				00DCC0AD20AF168900194A7A /* AppDelegate.swift in Sources */,
+				00DCC0E520AF1A7600194A7A /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,7 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00DCC0C220AF168D00194A7A /* BikeBuddyTests.swift in Sources */,
+				00DCC0EB20AF258C00194A7A /* BikeBuddyServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +507,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BikeBuddy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -448,6 +525,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BikeBuddy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -466,6 +544,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BikeBuddyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -486,6 +565,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = BikeBuddyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -505,6 +585,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z6W9JT2TG2;
 				INFOPLIST_FILE = BikeBuddyUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -524,6 +605,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z6W9JT2TG2;
 				INFOPLIST_FILE = BikeBuddyUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
