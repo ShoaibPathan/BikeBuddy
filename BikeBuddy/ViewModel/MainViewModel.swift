@@ -21,10 +21,10 @@ class MainViewModel {
     var mapStationLocations: Box<[MapStationLocation]?> = Box(nil)
     
     var fooBikeBuddyStations: [Station] = [
-        Station(name: "pos 1", timestamp: "123456789", location: Location(latitude: 42.487333, longitude: -83.263931), freeBikes: 10, emptySlots: 8, id: "123456789"),
-        Station(name: "pos 2", timestamp: "123456789", location: Location(latitude: 42.480135, longitude: -83.232492), freeBikes: 0, emptySlots: 8, id: "123456789"),
-        Station(name: "pos 3", timestamp: "123456789", location: Location(latitude: 42.473734, longitude: -83.258310), freeBikes: 4, emptySlots: 0, id: "123456789"),
-        Station(name: "pos 4", timestamp: "123456789", location: Location(latitude: 42.480210, longitude: -83.287035), freeBikes: 6, emptySlots: 8, id: "123456789")
+//        Station(name: "pos 1", timestamp: "123456789", location: Location(latitude: 42.487333, longitude: -83.263931), freeBikes: 10, emptySlots: 8, id: "123456789"),
+//        Station(name: "pos 2", timestamp: "123456789", location: Location(latitude: 42.480135, longitude: -83.232492), freeBikes: 0, emptySlots: 8, id: "123456789"),
+//        Station(name: "pos 3", timestamp: "123456789", location: Location(latitude: 42.473734, longitude: -83.258310), freeBikes: 4, emptySlots: 0, id: "123456789"),
+//        Station(name: "pos 4", timestamp: "123456789", location: Location(latitude: 42.480210, longitude: -83.287035), freeBikes: 6, emptySlots: 8, id: "123456789")
     ]
     
     func fetchFooData() {

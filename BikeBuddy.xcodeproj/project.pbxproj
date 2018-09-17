@@ -23,6 +23,10 @@
 		00DCC0F120AF34C600194A7A /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DCC0F020AF34C600194A7A /* NetworkHelper.swift */; };
 		00DCC0F320AF34FD00194A7A /* BikeBuddyServiceHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DCC0F220AF34FD00194A7A /* BikeBuddyServiceHandler.swift */; };
 		00DCC0F520AF488D00194A7A /* MapStationLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00DCC0F420AF488D00194A7A /* MapStationLocation.swift */; };
+		47987ED62150364B00916A19 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47987ED52150364B00916A19 /* Realm.framework */; };
+		47987ED72150364B00916A19 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 47987ED52150364B00916A19 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		47987EDB2150373700916A19 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47987EDA2150373700916A19 /* RealmSwift.framework */; };
+		47987EDC2150373700916A19 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 47987EDA2150373700916A19 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +45,21 @@
 			remoteInfo = BikeBuddy;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		47987ED82150364B00916A19 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				47987EDC2150373700916A19 /* RealmSwift.framework in Embed Frameworks */,
+				47987ED72150364B00916A19 /* Realm.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		00DCC0A920AF168900194A7A /* BikeBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BikeBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +84,8 @@
 		00DCC0F020AF34C600194A7A /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		00DCC0F220AF34FD00194A7A /* BikeBuddyServiceHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BikeBuddyServiceHandler.swift; sourceTree = "<group>"; };
 		00DCC0F420AF488D00194A7A /* MapStationLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStationLocation.swift; sourceTree = "<group>"; };
+		47987ED52150364B00916A19 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
+		47987EDA2150373700916A19 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +93,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47987EDB2150373700916A19 /* RealmSwift.framework in Frameworks */,
+				47987ED62150364B00916A19 /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +118,8 @@
 		00DCC0A020AF168900194A7A = {
 			isa = PBXGroup;
 			children = (
+				47987EDA2150373700916A19 /* RealmSwift.framework */,
+				47987ED52150364B00916A19 /* Realm.framework */,
 				00DCC0AB20AF168900194A7A /* BikeBuddy */,
 				00DCC0C020AF168D00194A7A /* BikeBuddyTests */,
 				00DCC0CB20AF168D00194A7A /* BikeBuddyUITests */,
@@ -202,6 +227,8 @@
 				00DCC0A520AF168900194A7A /* Sources */,
 				00DCC0A620AF168900194A7A /* Frameworks */,
 				00DCC0A720AF168900194A7A /* Resources */,
+				47987ED82150364B00916A19 /* Embed Frameworks */,
+				47987ED92150364F00916A19 /* Carthage copy-frameworks */,
 			);
 			buildRules = (
 			);
@@ -317,6 +344,25 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		47987ED92150364F00916A19 /* Carthage copy-frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Realm.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RealmSwift.framework",
+			);
+			name = "Carthage copy-frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		00DCC0A520AF168900194A7A /* Sources */ = {
@@ -508,6 +554,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = BikeBuddy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -526,6 +576,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = BikeBuddy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

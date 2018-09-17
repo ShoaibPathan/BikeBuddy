@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import RealmSwift
 
 class MainViewController: UIViewController {
     
@@ -43,19 +44,20 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         mapView.mapType = MKMapType.standard
         setupLocationServices()
-        viewModel.fetchFooData()
+//        viewModel.fetchFooData()
+        viewModel.fetchData()
         
         viewModel.bikeBuddyData.bind { data in
-           // Do stuff
+           
         }
-        
-        viewModel.mapStationLocations.bind { [unowned self] stationLocations in
-            self.stationLocations = stationLocations
-        }
-        
-        viewModel.curretLocation.bind { currentLocation in
-            self.currentLocation = currentLocation
-        }
+//
+//        viewModel.mapStationLocations.bind { [unowned self] stationLocations in
+//            self.stationLocations = stationLocations
+//        }
+//        
+//        viewModel.curretLocation.bind { currentLocation in
+//            self.currentLocation = currentLocation
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

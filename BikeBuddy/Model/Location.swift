@@ -9,6 +9,8 @@
 import Foundation
 
 struct Location: Codable {
+    var city: String?
+    var country: String?
     var latitude: Double
     var longitude: Double
 }
