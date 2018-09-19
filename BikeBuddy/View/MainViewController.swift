@@ -48,7 +48,7 @@ class MainViewController: UIViewController {
         viewModel.fetchData()
         
         viewModel.bikeBuddyData.bind { data in
-           
+           DataBase.write(data)
         }
 //
 //        viewModel.mapStationLocations.bind { [unowned self] stationLocations in

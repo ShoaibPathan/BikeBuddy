@@ -27,6 +27,7 @@
 		47987ED72150364B00916A19 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 47987ED52150364B00916A19 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		47987EDB2150373700916A19 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47987EDA2150373700916A19 /* RealmSwift.framework */; };
 		47987EDC2150373700916A19 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 47987EDA2150373700916A19 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F859A4C72151E5CC00B5A830 /* DataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F859A4C62151E5CC00B5A830 /* DataBase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		00DCC0F420AF488D00194A7A /* MapStationLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStationLocation.swift; sourceTree = "<group>"; };
 		47987ED52150364B00916A19 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		47987EDA2150373700916A19 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		F859A4C62151E5CC00B5A830 /* DataBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataBase.swift; path = ../../../../BikeBuddy/BikeBuddy/RealmHelpers/DataBase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,7 @@
 		00DCC0AB20AF168900194A7A /* BikeBuddy */ = {
 			isa = PBXGroup;
 			children = (
+				F859A4C52151E5B000B5A830 /* DataBase */,
 				00DCC0E920AF1CC500194A7A /* Helpers */,
 				00DCC0E620AF1B0F00194A7A /* Services */,
 				00DCC0DC20AF176700194A7A /* ViewModel */,
@@ -215,6 +218,14 @@
 				00DCC0F020AF34C600194A7A /* NetworkHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F859A4C52151E5B000B5A830 /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				F859A4C62151E5CC00B5A830 /* DataBase.swift */,
+			);
+			path = DataBase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -379,6 +390,7 @@
 				00DCC0E820AF1C9300194A7A /* BikeBuddyService.swift in Sources */,
 				00DCC0EF20AF2D2F00194A7A /* Box.swift in Sources */,
 				00DCC0AD20AF168900194A7A /* AppDelegate.swift in Sources */,
+				F859A4C72151E5CC00B5A830 /* DataBase.swift in Sources */,
 				00DCC0E520AF1A7600194A7A /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

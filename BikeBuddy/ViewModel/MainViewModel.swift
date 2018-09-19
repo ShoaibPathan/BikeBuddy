@@ -15,7 +15,7 @@ class MainViewModel {
     let regionRadius: CLLocationDistance = 1500
     
     private var bikeBuddyService = BikeBuddyService()
-    var bikeBuddyData: Box<[Network]?> = Box(nil)
+    var bikeBuddyData: Box<[Network]> = Box([])
     var curretLocation: Box<Location?> = Box(nil)
     
     var mapStationLocations: Box<[MapStationLocation]?> = Box(nil)

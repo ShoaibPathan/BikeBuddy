@@ -21,11 +21,6 @@ struct BikeBuddyService: Gettable {
             fatalError()
         }
         
-        //var request = URLRequest(url: url)
-        
-        //        if let params = params  {
-        //            request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-        //        }
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 completion(.failure(error))
@@ -37,7 +32,9 @@ struct BikeBuddyService: Gettable {
                 completion(.failure(NetworkError.emptyResponse))
                 return
             }
-            completion(.success(dataResponse.networks))
+            var networks = [Network]()
+            networks.append(contentsOf: dataResponse.networks)
+            completion(.success(networks))
             }.resume()
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Station: Codable {
+struct Station {
     var name: String
     var timestamp: String
     var location: Location

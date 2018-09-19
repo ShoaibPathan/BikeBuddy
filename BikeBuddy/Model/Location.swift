@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct Location: Codable {
-    var city: String?
-    var country: String?
-    var latitude: Double
-    var longitude: Double
+class Location: Object, Decodable {
+    @objc dynamic var city: String = ""
+    @objc dynamic var country: String = ""
+    @objc dynamic var latitude: Double = 0
+    @objc dynamic var longitude: Double = 0
 }
