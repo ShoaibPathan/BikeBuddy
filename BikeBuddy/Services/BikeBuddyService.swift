@@ -21,25 +21,21 @@ struct BikeBuddyService: Gettable {
             fatalError()
         }
         
-        var request = URLRequest(url: url)
-        
-        if let params = params  {
-            request.httpBody = try? JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
-        }
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 completion(.failure(error))
                 return
             }
+            
             let decoder = JSONDecoder()
-        guard let data = data, let dataResponse = try? decoder.decode([Network].self, from: data) else {
+            guard let data = data, let dataResponse = try? decoder.decode(APIResponse.self, from: data) else {
                 completion(.failure(NetworkError.emptyResponse))
                 return
             }
-            completion(.success(dataResponse))
-        }
-        task.resume()
+            var networks = [Network]()
+            networks.append(contentsOf: dataResponse.networks)
+            completion(.success(networks))
+            }.resume()
     }
 }
 
