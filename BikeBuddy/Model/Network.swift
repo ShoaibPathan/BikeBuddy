@@ -21,18 +21,10 @@ class Network: Object, Decodable {
     @objc dynamic var name: String = ""
     @objc dynamic var id: String = ""
     
+    @objc dynamic var uniqueKey: String = ""
+    
     private enum CodingKeys: String, CodingKey {
         case company, href, location, name, id
-    }
-    
-    convenience init(company: List<String>, href: String,
-                     location: Location?, name: String, id: String) {
-        self.init()
-        self.company = company
-        self.href = href
-        self.location = location
-        self.name = name
-        self.id = id
     }
     
     convenience required init(from decoder: Decoder) throws {
@@ -46,7 +38,26 @@ class Network: Object, Decodable {
         if let companies = companies {
             realmCompanies.append(objectsIn: companies)
         }
+        let uniqueKey = "\(name)\(location?.latitude ?? 0)"
         self.init(company: realmCompanies, href: href,
-                  location: location, name: name, id: id)
+                  location: location, name: name, id: id, uniqueKey: uniqueKey)
+    }
+    
+    override class func primaryKey() -> String? {
+        return "uniqueKey"
+    }
+}
+
+// Initializers
+extension Network {
+    convenience init(company: List<String>, href: String,
+                     location: Location?, name: String, id: String, uniqueKey: String) {
+        self.init()
+        self.company = company
+        self.href = href
+        self.location = location
+        self.name = name
+        self.id = id
+        self.uniqueKey = uniqueKey
     }
 }
