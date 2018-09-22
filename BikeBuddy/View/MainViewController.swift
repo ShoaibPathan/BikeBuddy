@@ -45,7 +45,9 @@ class MainViewController: UIViewController {
         mapView.mapType = MKMapType.standard
         setupLocationServices()
 //        viewModel.fetchFooData()
-        viewModel.fetchData()
+        if DataBase.isDataInValid {
+            viewModel.fetchData()
+        }
         
         viewModel.bikeBuddyData.bind { data in
            DataBase.write(data)
@@ -95,7 +97,6 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        viewModel.fetchData()
     }
 }
 
