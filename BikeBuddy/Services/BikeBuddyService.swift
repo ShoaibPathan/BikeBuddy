@@ -28,14 +28,14 @@ struct BikeBuddyService: Gettable {
             }
             
             let decoder = JSONDecoder()
-            guard let data = data, let dataResponse = try? decoder.decode(APIResponse.self, from: data) else {
-                completion(.failure(NetworkError.emptyResponse))
-                return
+            var dataResponse: APIResponse
+            do {
+                guard let data = data else { return }
+                dataResponse = try decoder.decode(APIResponse.self, from: data)
+                completion(.success(dataResponse.networks))
+            } catch {
+                completion(.failure(error))
             }
-            var networks = [Network]()
-            networks.append(contentsOf: dataResponse.networks)
-            completion(.success(networks))
             }.resume()
     }
 }
-

@@ -9,7 +9,7 @@
 import Foundation
 
 protocol BikeBuddyServiceHandler {
-    func didReceiveData(_ data: Array<Network>)
+    func didReceiveData(_ data: [Network])
     func didFailWith(_ error: Error)
 }
 

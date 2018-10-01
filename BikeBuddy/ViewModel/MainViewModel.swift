@@ -51,7 +51,7 @@ class MainViewModel {
 }
 
 extension MainViewModel: BikeBuddyServiceHandler {
-    func didReceiveData(_ data: Array<Network>) {
+    func didReceiveData(_ data: [Network]) {
         bikeBuddyData.value = data
     }
     
