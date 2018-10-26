@@ -103,7 +103,7 @@ class MainViewController: UIViewController {
 extension MainViewController: CLLocationManagerDelegate {
     
     func centerMapOnLocation(_ location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, viewModel.regionRadius * 2.0, viewModel.regionRadius * 2.0)
+        let coordinateRegion = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: viewModel.regionRadius * 2.0, longitudinalMeters: viewModel.regionRadius * 2.0)
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
