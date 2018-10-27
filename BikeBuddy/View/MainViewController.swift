@@ -16,79 +16,31 @@ class MainViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var centerMapButton: UIButton!
     
-    let viewModel = MainViewModel()
-    var currentLocation: Location? {
-        didSet {
-            guard let currentLocation = self.currentLocation else { return }
-            centerMapOnLocation(CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude))
-        }
-    }
-    
-    var stationLocations: [MapStationLocation]? {
-        didSet {
-            filteredStationLocations = stationLocations
-            segmentedControl.selectedSegmentIndex = 0
-        }
-    }
-    var filteredStationLocations: [MapStationLocation]? {
-        didSet {
-            guard let filteredStationLocations = filteredStationLocations else { return }
-            if let stationLocations = self.stationLocations {
-                self.mapView.removeAnnotations(stationLocations)
-            }
-            self.mapView.addAnnotations(filteredStationLocations)
-        }
-    }
+    private lazy var viewModel = MainViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapView.mapType = MKMapType.standard
-        setupLocationServices()
-//        viewModel.fetchFooData()
-        if DataBase.isDataInValid {
-            viewModel.fetchData()
-        }
-        
-        viewModel.bikeBuddyData.bind { data in
-           DataBase.write(data)
-        }
-//
-//        viewModel.mapStationLocations.bind { [unowned self] stationLocations in
-//            self.stationLocations = stationLocations
-//        }
-//        
-//        viewModel.curretLocation.bind { currentLocation in
-//            self.currentLocation = currentLocation
-//        }
+        mapView.mapType = .standard
+        bindViewModel()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        guard let currentLocation = self.currentLocation else { return }
-        centerMapOnLocation(CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude))
+    private func bindViewModel() {
+        viewModel.setLocationManagerDelegate(self)
+        viewModel.fetchData()
+        
+        viewModel.bikeBuddyData.bind { data in
+            DataBase.write(data)
+        }
     }
     
     @IBAction func segmentedControlAction(_ sender: UISegmentedControl) {
         guard let option = UserOptions(rawValue: sender.selectedSegmentIndex) else {
             return
         }
-        filterLocations(for: option)
     }
     
     @IBAction func centerMapButtonAction(_ sender: UIButton) {
-        
-    }
-    
-    
-    func filterLocations(for userOption: UserOptions) {
-        switch userOption {
-        case .all:
-            filteredStationLocations = stationLocations
-        case .pickup:
-            filteredStationLocations = stationLocations?.filter{ ($0.station?.freeBikes)! > 0}
-        case .dropout:
-            filteredStationLocations = stationLocations?.filter{  ($0.station?.emptySlots)! > 0}
-        }
+        centerMapOnLocation(viewModel.currentLocation)
     }
     
     enum UserOptions: Int {
@@ -103,21 +55,19 @@ class MainViewController: UIViewController {
 extension MainViewController: CLLocationManagerDelegate {
     
     func centerMapOnLocation(_ location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegion.init(center: location.coordinate, latitudinalMeters: viewModel.regionRadius * 2.0, longitudinalMeters: viewModel.regionRadius * 2.0)
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
+                                                  latitudinalMeters: viewModel.regionRadius * 2.0,
+                                                  longitudinalMeters: viewModel.regionRadius * 2.0)
+        
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
-    func setupLocationServices() {
-        guard CLLocationManager.locationServicesEnabled() else {
-            viewModel.locationManager.requestWhenInUseAuthorization()
-            return
-        }
-        viewModel.locationManager.delegate = self
-        viewModel.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        viewModel.locationManager.startUpdatingLocation()
-        
-        if let location = viewModel.locationManager.location {
-            centerMapOnLocation(location)
+    func locationManager(_ manager: CLLocationManager,
+                         didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            guard let currentLocation = manager.location else { return }
+            viewModel.currentLocation = currentLocation
+            centerMapOnLocation(currentLocation)
         }
     }
 }
