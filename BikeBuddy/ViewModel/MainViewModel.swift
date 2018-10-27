@@ -19,31 +19,20 @@ class MainViewModel {
         return manager
     }()
     
-    lazy var currentLocation: CLLocation = {
+    let isdataReceived = Box<Bool>()
+    
+    var currentLocation: CLLocation {
         return locationManager.location ?? CLLocation(latitude: 0, longitude: 0)
-    }()
+    }
     
     let regionRadius: CLLocationDistance = 1500
     
-    private var bikeBuddyService = BikeBuddyService()
-    var bikeBuddyData: Box<[Network]> = Box([])
-    var curretLocation: Box<Location?> = Box(nil)
-    
-    var mapStationLocations: Box<[MapStationLocation]?> = Box(nil)
+    private lazy var bikeBuddyService = BikeBuddyService()
     
     func fetchData() {
         if DataBase.isDataInValid {
             getBikeBuddyData(from: bikeBuddyService)
         }
-    }
-    
-    func fetchData(for location: Location, distance: Int = 0) {
-        bikeBuddyService.update(location: location, distance: distance)
-        getBikeBuddyData(from: bikeBuddyService)
-    }
-    
-    var networkList: [Network]? {
-        return bikeBuddyData.value
     }
     
     func setLocationManagerDelegate(_ delegate: CLLocationManagerDelegate) {
@@ -53,7 +42,8 @@ class MainViewModel {
 
 extension MainViewModel: BikeBuddyServiceHandler {
     func didReceiveData(_ data: [Network]) {
-        bikeBuddyData.value = data
+        DataBase.write(data)
+        isdataReceived.resolve(true)
     }
     
     func didFailWith(_ error: Error) {
@@ -64,6 +54,3 @@ extension MainViewModel: BikeBuddyServiceHandler {
         print("Network Error: \(localizedDescription)")
     }
 }
-
-
-

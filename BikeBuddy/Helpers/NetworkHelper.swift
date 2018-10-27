@@ -12,12 +12,7 @@ enum NetworkError: Error {
     case emptyResponse
 }
 
-enum Result<T> {
-    case success(T)
-    case failure(Error)
-}
-
 protocol Gettable {
     associatedtype DataType
-    func get(_ completion: @escaping (Result<DataType>) -> Void)
+    func get() -> Box<DataType>
 }

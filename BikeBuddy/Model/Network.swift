@@ -8,6 +8,7 @@
 
 import RealmSwift
 import Foundation
+import CoreLocation
 
 struct APIResponse: Decodable {
     var networks: [Network]
@@ -44,5 +45,15 @@ extension Network {
         self.location = location
         self.name = name
         self.uniqueKey = uniqueKey
+    }
+}
+
+extension Network {
+    var coordinates: CLLocationCoordinate2D {
+        guard let latitude = location?.latitude, let longitude = location?.longitude else {
+            return CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        }
+        return CLLocationCoordinate2D(latitude: latitude,
+                                      longitude: longitude)
     }
 }

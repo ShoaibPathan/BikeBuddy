@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import MapKit
 
 struct DataBase { private init() { } }
 
@@ -45,5 +46,13 @@ extension DataBase {
         
         let realm = try! Realm()
         return realm.objects(Network.self).isEmpty
+    }
+    
+    static func nearbySpots(mapRect: MKMapRect) -> [Network] {
+        let realm = try! Realm()
+        let data = realm.objects(Network.self).filter {
+            mapRect.contains(MKMapPoint($0.coordinates))
+        }
+        return Array(data)
     }
 }

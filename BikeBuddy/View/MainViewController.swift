@@ -17,10 +17,15 @@ class MainViewController: UIViewController {
     @IBOutlet weak var centerMapButton: UIButton!
     
     private lazy var viewModel = MainViewModel()
+    
+    var nearbySpots: [Network] {
+        return DataBase.nearbySpots(mapRect: mapView.visibleMapRect)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.mapType = .standard
+        centerMapOnLocation(viewModel.currentLocation)
         bindViewModel()
     }
     
@@ -28,27 +33,25 @@ class MainViewController: UIViewController {
         viewModel.setLocationManagerDelegate(self)
         viewModel.fetchData()
         
-        viewModel.bikeBuddyData.bind { data in
-            DataBase.write(data)
+        viewModel.isdataReceived.then { [weak self] _ in
+            self?.addAnnotations()
+        }
+    }
+    
+    private func addAnnotations() {
+        nearbySpots.forEach { spot in
+            let annotation = MKPointAnnotation()
+            annotation.title = spot.name
+            annotation.coordinate = spot.coordinates
+            mapView.addAnnotation(annotation)
         }
     }
     
     @IBAction func segmentedControlAction(_ sender: UISegmentedControl) {
-        guard let option = UserOptions(rawValue: sender.selectedSegmentIndex) else {
-            return
-        }
     }
     
     @IBAction func centerMapButtonAction(_ sender: UIButton) {
         centerMapOnLocation(viewModel.currentLocation)
-    }
-    
-    enum UserOptions: Int {
-        case all, pickup, dropout
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     }
 }
 
@@ -66,7 +69,6 @@ extension MainViewController: CLLocationManagerDelegate {
                          didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse {
             guard let currentLocation = manager.location else { return }
-            viewModel.currentLocation = currentLocation
             centerMapOnLocation(currentLocation)
         }
     }
@@ -76,7 +78,7 @@ extension MainViewController : MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        guard let annotation = annotation as? MapStationLocation else { return nil }
+        guard annotation is MKPointAnnotation else { return nil }
         
         let identifier = "marker"
         var view: MKMarkerAnnotationView
@@ -93,5 +95,9 @@ extension MainViewController : MKMapViewDelegate {
         }
         
         return view
+    }
+    
+    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        addAnnotations()
     }
 }
