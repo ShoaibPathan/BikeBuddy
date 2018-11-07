@@ -21,7 +21,7 @@ class FooBikeBuddyService: Gettable {
 
 class BikeBuddyServiceTests: XCTestCase {
 
-    let newyork = Location(latitude: 40.6976633, longitude: -74.1201077)
+    //let newyork = Location(latitude: 40.6976633, longitude: -74.1201077)
     let viewModel = MainViewModel()
     var bikeBuddyData: [Network]?
     

@@ -15,13 +15,10 @@ protocol BikeBuddyServiceHandler {
 
 extension BikeBuddyServiceHandler {
     public func getBikeBuddyData<T: Gettable> (from service: T) where T.DataType == [Network] {
-        service.get() {result in
-            switch result {
-            case .success(let bikeBuddyData):
-                self.didReceiveData(bikeBuddyData)
-            case .failure(let error):
+        service.get().then { result in
+            self.didReceiveData(result)
+            }.error { error in
                 self.didFailWith(error)
-            }
         }
     }
 }

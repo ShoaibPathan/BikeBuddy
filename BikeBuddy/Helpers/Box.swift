@@ -9,22 +9,67 @@
 import Foundation
 
 class Box<T> {
-    typealias Listener = (T) -> Void
     
-    var value: T {
+    typealias Listener = (T) -> Void
+    typealias ErrorListener = (Error) -> Void
+    
+    var value: T? {
         didSet {
-            listener?(value)
+            listener?(value!)
+            runErrorClosures()
+            runResultClosures()
         }
     }
     
-    var listener: Listener?
+    var error: Error? {
+        didSet {
+            runResultClosures()
+            runErrorClosures()
+        }
+    }
+    
+    private var listener: Listener?
+    private var errorClosures = [ErrorListener]()
+    private var resultClosures = [Listener]()
     
     init(_ value: T) {
         self.value = value
     }
     
+    init() { }
+    
     func bind(listener: Listener?) {
         self.listener = listener
-        listener?(value)
+        listener?(value!)
+    }
+    
+    func resolve(_ value: T) {
+        self.value = value
+    }
+    
+    func fail(_ error: Error) {
+        self.error = error
+    }
+    
+    @discardableResult
+    func then(_ result: @escaping Listener) -> Box<T> {
+        resultClosures.append(result)
+        return self
+    }
+    
+    @discardableResult
+    func error(_ error: @escaping ErrorListener) -> Box<T> {
+        errorClosures.append(error)
+        return self
+    }
+}
+
+private extension Box {
+    func runResultClosures() {
+        resultClosures.forEach { value.map($0) }
+    }
+    
+    func runErrorClosures() {
+        errorClosures.forEach { error.map($0) }
     }
 }

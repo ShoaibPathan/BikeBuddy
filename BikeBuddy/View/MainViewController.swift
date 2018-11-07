@@ -16,108 +16,60 @@ class MainViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var centerMapButton: UIButton!
     
-    let viewModel = MainViewModel()
-    var currentLocation: Location? {
-        didSet {
-            guard let currentLocation = self.currentLocation else { return }
-            centerMapOnLocation(CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude))
-        }
-    }
+    private lazy var viewModel = MainViewModel()
     
-    var stationLocations: [MapStationLocation]? {
-        didSet {
-            filteredStationLocations = stationLocations
-            segmentedControl.selectedSegmentIndex = 0
-        }
-    }
-    var filteredStationLocations: [MapStationLocation]? {
-        didSet {
-            guard let filteredStationLocations = filteredStationLocations else { return }
-            if let stationLocations = self.stationLocations {
-                self.mapView.removeAnnotations(stationLocations)
-            }
-            self.mapView.addAnnotations(filteredStationLocations)
-        }
+    var nearbySpots: [Network] {
+        return DataBase.nearbySpots(mapRect: mapView.visibleMapRect)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapView.mapType = MKMapType.standard
-        setupLocationServices()
-//        viewModel.fetchFooData()
-        if DataBase.isDataInValid {
-            viewModel.fetchData()
-        }
-        
-        viewModel.bikeBuddyData.bind { data in
-           DataBase.write(data)
-        }
-//
-//        viewModel.mapStationLocations.bind { [unowned self] stationLocations in
-//            self.stationLocations = stationLocations
-//        }
-//        
-//        viewModel.curretLocation.bind { currentLocation in
-//            self.currentLocation = currentLocation
-//        }
+        mapView.mapType = .standard
+        centerMapOnLocation(viewModel.currentLocation)
+        bindViewModel()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        guard let currentLocation = self.currentLocation else { return }
-        centerMapOnLocation(CLLocation(latitude: currentLocation.latitude, longitude: currentLocation.longitude))
+    private func bindViewModel() {
+        viewModel.setLocationManagerDelegate(self)
+        viewModel.fetchData()
+        
+        viewModel.isdataReceived.then { [weak self] _ in
+            self?.addAnnotations()
+        }
+    }
+    
+    private func addAnnotations() {
+        nearbySpots.forEach { spot in
+            let annotation = MKPointAnnotation()
+            annotation.title = spot.name
+            annotation.coordinate = spot.coordinates
+            mapView.addAnnotation(annotation)
+        }
     }
     
     @IBAction func segmentedControlAction(_ sender: UISegmentedControl) {
-        guard let option = UserOptions(rawValue: sender.selectedSegmentIndex) else {
-            return
-        }
-        filterLocations(for: option)
     }
     
     @IBAction func centerMapButtonAction(_ sender: UIButton) {
-        
-    }
-    
-    
-    func filterLocations(for userOption: UserOptions) {
-        switch userOption {
-        case .all:
-            filteredStationLocations = stationLocations
-        case .pickup:
-            filteredStationLocations = stationLocations?.filter{ ($0.station?.freeBikes)! > 0}
-        case .dropout:
-            filteredStationLocations = stationLocations?.filter{  ($0.station?.emptySlots)! > 0}
-        }
-    }
-    
-    enum UserOptions: Int {
-        case all, pickup, dropout
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        centerMapOnLocation(viewModel.currentLocation)
     }
 }
 
 extension MainViewController: CLLocationManagerDelegate {
     
     func centerMapOnLocation(_ location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, viewModel.regionRadius * 2.0, viewModel.regionRadius * 2.0)
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate,
+                                                  latitudinalMeters: viewModel.regionRadius * 2.0,
+                                                  longitudinalMeters: viewModel.regionRadius * 2.0)
+        
         mapView.setRegion(coordinateRegion, animated: true)
     }
     
-    func setupLocationServices() {
-        guard CLLocationManager.locationServicesEnabled() else {
-            viewModel.locationManager.requestWhenInUseAuthorization()
-            return
-        }
-        viewModel.locationManager.delegate = self
-        viewModel.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        viewModel.locationManager.startUpdatingLocation()
-        
-        if let location = viewModel.locationManager.location {
-            centerMapOnLocation(location)
+    func locationManager(_ manager: CLLocationManager,
+                         didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            guard let currentLocation = manager.location else { return }
+            centerMapOnLocation(currentLocation)
         }
     }
 }
@@ -126,7 +78,7 @@ extension MainViewController : MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        guard let annotation = annotation as? MapStationLocation else { return nil }
+        guard annotation is MKPointAnnotation else { return nil }
         
         let identifier = "marker"
         var view: MKMarkerAnnotationView
@@ -143,5 +95,9 @@ extension MainViewController : MKMapViewDelegate {
         }
         
         return view
+    }
+    
+    func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
+        addAnnotations()
     }
 }
